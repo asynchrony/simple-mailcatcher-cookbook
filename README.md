@@ -16,7 +16,6 @@ This cookbook installs simple-mailcatcher using chefs' embedded ruby.
 
 * `node['mailcatcher']['user']` -  Defaults to `mailcatcher`.
 * `node['mailcatcher']['group']` -  Defaults to `mailcatcher`.
-* `node['mailcatcher']['dir']` -  Defaults to `/opt`.
 * `node['mailcatcher']['version']` -  Defaults to `0.6.2`.
 * `node['mailcatcher']['smtp']['ip']` -  Defaults to `0.0.0.0`.
 * `node['mailcatcher']['smtp']['port']` -  Defaults to `1025`.
