@@ -6,4 +6,5 @@ group :integration do
   cookbook 'simple-mailcatcher-test', path: 'test/fixtures/cookbooks/simple-mailcatcher-test'
 end
 
+cookbook 'apt'
 cookbook 'build-essential'

@@ -1,3 +1,7 @@
+if platform_family? 'debian'
+  include_recipe 'apt'
+end
+
 include_recipe 'build-essential'
 
 package node['mailcatcher']['sqlite3-dev-package']
