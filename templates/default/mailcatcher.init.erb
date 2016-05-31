@@ -24,10 +24,10 @@ start() {
         --chuid $USER \
         -- \
         --foreground \
-        --http-ip=0.0.0.0 \
-        --http-port=1080 \
-        --smtp-port=1025 \
-        --smtp-ip=0.0.0.0
+        --http-ip=<%= node['mailcatcher']['http']['ip'] -%> \
+        --http-port=<%= node['mailcatcher']['http']['port'] -%> \
+        --smtp-port=<%= node['mailcatcher']['smtp']['port'] -%> \
+        --smtp-ip=<%= node['mailcatcher']['smtp']['ip'] -%>
 
     echo "."
     return $?

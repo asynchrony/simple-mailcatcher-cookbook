@@ -12,6 +12,8 @@ platforms:
     driver_config:
       provision_command:
         - apt-get -y install build-essential
+  - name: centos-6.5
+
 
 suites:
   - name: default

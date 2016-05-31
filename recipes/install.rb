@@ -1,5 +1,6 @@
-package 'build-essential'
-package 'libsqlite3-dev'
+include_recipe 'build-essential'
+
+package node['mailcatcher']['sqlite3-dev-package']
 
 chef_gem 'mailcatcher' do
   compile_time false

@@ -1,0 +1,63 @@
+#!/bin/bash
+# chkconfig: 345 70 30
+# description: MailCatcher is a simple SMTP server to catch and display mail
+# processname: mailcatcher
+
+# Source function library.
+. /etc/init.d/functions
+
+RETVAL=0
+PROG=/opt/chef/embedded/bin/mailcatcher
+LOCKFILE=/var/lock/subsys/mailcatcher
+
+# Declare variables for MailCatcher
+USER=<%= node['mailcatcher']['user'] %>
+HTTP_IP=<%= node['mailcatcher']['http']['ip'] %>
+HTTP_PORT=<%= node['mailcatcher']['http']['port'] %>
+SMTP_IP=<%= node['mailcatcher']['smtp']['ip'] %>
+SMTP_PORT=<%= node['mailcatcher']['smtp']['port'] %>
+
+start() {
+        echo -n "Starting MailCatcher: "
+        daemon --user $USER $PROG --http-ip $HTTP_IP --http-port $HTTP_PORT --smtp-ip $SMTP_IP --smtp-port $SMTP_PORT --no-quit
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && touch $LOCKFILE
+        return $RETVAL
+}
+
+stop() {
+        echo -n "Stopping MailCatcher: "
+        killproc $PROG
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && rm -f $LOCKFILE
+        return $RETVAL
+}
+
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status mailcatcher
+        RETVAL=$?
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: mailcatcher {start|stop|status|restart}"
+        exit 1
+        ;;
+esac
+exit $RETVAL
